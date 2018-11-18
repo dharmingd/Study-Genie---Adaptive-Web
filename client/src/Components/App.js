@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Header from './Header';
 import { connect } from 'react-redux';
 import * as actions from '../Actions';
-import Dashboard from './Dashboard';
-import SurveyNew from './Survey/SurveyNew';
-import LandingPage from './LandingPage';
+import Header from './Header/header';
+import LandingPage from './LandingPage/landingPage';
+import LeftSideBar from './LeftSideBar/leftSideBar';
+import Dashboard from './Dashboard/dashboard';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -16,10 +16,10 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            <Header />
+            <Header/>
+            <LeftSideBar/>
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route exact path="/survey/new" component={SurveyNew} />
+              <Route exact path="/dashboard" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>
