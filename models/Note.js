@@ -1,8 +1,6 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
-
-
-const noteSchema=new Schema({
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const noteSchema = new Schema({
 	userId:{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'users'
@@ -29,7 +27,6 @@ const noteSchema=new Schema({
 	numberOfLikes:Number,
 	numberOfFavourites:Number,
 	tags:Array,
-	firstCreatedTime:Date
+	timeStamp:{type: Date, default: Date.now}
 });
-
 mongoose.model('notes',noteSchema)
