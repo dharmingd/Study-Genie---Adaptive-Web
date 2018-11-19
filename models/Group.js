@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const groupSchema = new Schema({
-    userId : [{
+    _user : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'users'
     }],
-    noteId : [{
+    _note : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'users'
+        ref : 'notes'
     }],
     status : {
         type : String,
