@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const noteSchema = new Schema({
-	userId:{
+	_user:{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'users'
 	},
-	groupIds:[{
+	_groups:[{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'groups'
 	}],
 	// As status has only 2 fixed values, so using enum
 	status:{
 		type:String,
-		enum:['public','private']
+		enum:['Public','Private']
 	},
 	// As category has only 2 fixed values, so using enum
 	category:{
