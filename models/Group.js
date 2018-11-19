@@ -9,8 +9,8 @@ const groupSchema = new Schema({
     status : {
         type : String,
         enum : ['Public, Private']
-    }
-
+    },
+    time : Date
 });
 
 mongoose.model('groups', groupSchema);
