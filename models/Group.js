@@ -14,7 +14,7 @@ const groupSchema = new Schema({
         type : String,
         enum : ['Public, Private']
     },
-    time : Date
+    timeStamp : Date
 });
 
 mongoose.model('groups', groupSchema);
