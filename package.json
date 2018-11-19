@@ -21,6 +21,7 @@
     "nodemon": "^1.18.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^4.2.0"
+    "path-parser": "^4.2.0",
+    "react-widgets": "^4.4.6"
   }
 }
