@@ -1,0 +1,84 @@
+.leftBar{
+    height: 100vh;
+    width: 100%;
+    //border-right: 1px solid black;
+    border: none;
+    box-shadow: 2px 5px 10px 0 #ABB2B9;
+    padding-top: 10px;
+    background-color: #151B26;
+    color: white;
+    font-weight: bold;
+}
+
+.navlink{
+    color: #D7DBDD;
+}
+
+.navlink:hover{
+    text-decoration: none;
+    color: #76D7C4;
+}
+
+.iconCategory{
+    margin-bottom: 10px;
+    color: #D7DBDD;
+    transition: 0.4s;
+    padding-left: 40px;
+    font-size: 0.9em;
+}
+
+
+
+.icon{
+    display: inline-block;
+    width: 30px;
+}
+
+.category{
+    display: inline-block;
+}
+
+.iconCategory:hover{
+    color: #76D7C4;
+    cursor: pointer;
+}
+
+.titleOuter{
+    width: 100%;
+    border-bottom: 0.5px solid #76D7C4;
+    padding-bottom: 10px;
+}
+
+.titleLink{
+    font-size: 1.5em;
+    color: #76D7C4;
+    font-weight: bold;
+
+}
+
+.titleLink:hover{
+    color: #76D7C4;
+    text-decoration: none;
+}
+
+.profilePic{
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.centerLeft{
+    text-align: center;
+}
+
+.userNameLeft{
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.selectedNavBarLink{
+    color: #76D7C4;
+}

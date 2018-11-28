@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../Actions';
-import Header from './Header/header';
+
 import LandingPage from './LandingPage/landingPage';
-import LeftSideBar from './LeftSideBar/leftSideBar';
-import Dashboard from './Dashboard/dashboard';
+import Dashboard from '../Containers/Dashboard/dashboard';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -16,10 +15,8 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            <Header/>
-            <LeftSideBar/>
-            <Route exact path="/" component={LandingPage} />
-              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/user" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>
