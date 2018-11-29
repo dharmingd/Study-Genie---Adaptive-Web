@@ -5,46 +5,31 @@ import thumps_up from "./thumps_up.svg";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import { zoomIn } from "react-animations";
 import Radium, { StyleRoot } from "radium";
-import Modal from "react-responsive-modal";
-import styles from './styles.css';
+import SingleNoteModal from "../SingleNoteModal/SingleNoteModal";
+import Modal from "react-modal";
+import styles from "./styles.css";
 
 class ListNotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      singleNote: {}
     };
   }
 
-  onOpenModal = () => {
-    this.setState({ modalOpen: true });
-  };
-
-  onCloseModal = () => {
-    this.setState({ modalOpen: false });
-  };
-
   renderNoteModal() {
-    const { modalOpen } = this.state;
-    return (
-      <div>
-        <button onClick={this.onOpenModal}>Open modal</button>
-        <Modal
-          open={modalOpen}
-          onClose={this.onCloseModal}
-          center
-          classNames={{
-            transitionEnter: styles.transitionEnter,
-            transitionEnterActive: styles.transitionEnterActive,
-            transitionExit: styles.transitionExitActive,
-            transitionExitActive: styles.transitionExitActive
-          }}
-          animationDuration={2000}
-        >
-          <h2>Simple centered modal</h2>
-        </Modal>
-      </div>
-    );
+    if (this.state.modalOpen === false) {
+      return <div />;
+    }
+    return <SingleNoteModal note={this.state.singleNote} onClose={()=>this.setState({modalOpen: false})}/>;
+  }
+
+  openSingleNoteModal(note) {
+    this.setState({
+      modalOpen: true,
+      singleNote: note
+    });
   }
 
   renderNote() {
@@ -56,9 +41,12 @@ class ListNotes extends Component {
         paddingRight: "0",
         borderRadius: "1px"
       };
-
       return (
-        <div className="col-md-3" style={styles.zoomIn}>
+        <div
+          className="col-md-3"
+          style={styles.zoomIn}
+          onClick={() => this.openSingleNoteModal(note)}
+        >
           <Flipped key={note._id} flipId={note._id}>
             <div className="noteListWrapper">
               <div className="fixHeight">
