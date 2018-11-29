@@ -7,8 +7,9 @@
     background-color: #212121;
     color: white;
     font-weight: bold;
-    position: fixed;
-    width: 16%;
+    position: fixed; 
+    width: 18%;
+    transition: width 0.5s;
 }
 
 .navlink{
@@ -82,4 +83,14 @@
 
 .selectedNavBarLink{
     color: #76D7C4;
+}
+#closeB{
+    position: absolute;
+    right: 5px;
+    top:5px;
+    cursor: pointer;
+}
+#change {
+    display: none;
+    cursor: pointer;
 }

@@ -15,6 +15,12 @@ body {
     margin: 0;
     font-family: "Roboto", sans-serif;
 }
-
-
+.menuBar {
+    width: 18%;
+    transition: width 0.5s;
+}
+.everything {
+    width: 82%;
+    transition: width 0.5s;
+}
 textarea, select, input, button { outline: none; }

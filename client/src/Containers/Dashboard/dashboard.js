@@ -14,14 +14,30 @@ class Dashboard extends Component{
         super(props);
     }
 
+    changeWidth = (val) => {
+        console.log("hereee");
+        let bar = document.getElementById("menu");
+        let rest = document.getElementById("rest");
+        if(val){
+            bar.style.width = 5+"%";
+            rest.style.width = 95+"%";
+        }
+        else{
+            console.log("find me")
+            bar.style.width = 18+"%";
+            rest.style.width = 82+"%";
+        }
+        
+    }
+
     render(){
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-2">
-                        <LeftSideBar />
+                    <div className="menuBar" id="menu">
+                        <LeftSideBar  fromBar = {this.changeWidth}/>
                     </div>
-                    <div className="col-md-10">
+                    <div className="everything" id="rest">
                             <div className='row'>
                                 <div className='col-md-4'></div>
                                 <div className='col-md-4 newNoteOuterDiv'><NewNotes/></div>
