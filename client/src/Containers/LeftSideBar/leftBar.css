@@ -1,13 +1,14 @@
 .leftBar{
     height: 100vh;
-    width: 100%;
     //border-right: 1px solid black;
     border: none;
     box-shadow: 2px 5px 10px 0 #ABB2B9;
     padding-top: 10px;
-    background-color: #151B26;
+    background-color: #212121;
     color: white;
     font-weight: bold;
+    position: fixed;
+    width: 16%;
 }
 
 .navlink{

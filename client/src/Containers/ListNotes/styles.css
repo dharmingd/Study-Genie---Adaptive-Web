@@ -1,0 +1,14 @@
+.transitionEnter {
+    transform: scale(0);
+}
+.transitionEnterActive {
+    transform: scale(1);
+    transition: transform 1000ms ease;
+}
+.transitionExit {
+    transform: scale(1);
+}
+.transitionExitActive {
+    transform: scale(0);
+    transition: transform 1000ms ease;
+}
