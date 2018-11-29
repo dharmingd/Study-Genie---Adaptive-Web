@@ -1,0 +1,128 @@
+.noteListMainWrapper{
+    padding-bottom: 30px;
+}
+
+.noteListWrapper{
+    margin-top: 20px;
+    box-shadow: 0 0 20px #D5D8DC;
+    border-radius: 1px;
+}
+
+.noteListWrapper:hover{
+    cursor: pointer;
+}
+
+.fixHeight{
+    height: 150px;
+    overflow: hidden;
+}
+.col-md-2, .col-md-1, .col-md-9{
+    padding: 0;
+    margin: 0;
+}
+
+.noteListTile{
+    font-size: 1em;
+}
+
+.nodeListContent{
+    padding: 5px;
+    font-size: 0.9em;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.nodeListBorder{
+    //border: 0.5px solid #D5D8DC;
+
+}
+
+.nodeListTag{
+    display: inline-block;
+    background-color: #EC7063;
+    padding: 0 1px;
+    color: white;
+    border-radius: 2px;
+    font-size: 0.7em;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.nodeListCategoryNote{
+
+    background-color: #58D68D;
+}
+
+.nodeListCategoryCheatsheet{
+    background-color: #3498DB;
+}
+
+.reduceOpacity{
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    opacity: 0.5;
+    //background-color: black;
+}
+
+#bottom_fade {
+    width: 100%;
+    height: 120px;
+    z-index: 99;
+    position: absolute;
+    top:50px;
+    background: url("bottom-fade.png") bottom center no-repeat;
+}
+
+.heart{
+    font-size: 18px;
+    color: #D7DBDD;
+    margin-top: 2px;
+}
+
+.heart:hover{
+    cursor: pointer;
+}
+
+.noteListHeart{
+    //text-align: center;
+}
+
+.iconText{
+    display: inline-block;
+    margin-left: 3px;
+    font-size: 0.8em;
+}
+
+
+.thumbsUp{
+    font-size: 18px;
+    color: #D7DBDD;
+    //position: absolute;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.thumbsUp:hover{
+    cursor: pointer;
+}
+
+.noteListLike{
+    //position: absolute;
+    right: 0;
+}
+
+.transitionEnter {
+    transform: scale(0);
+}
+.transitionEnterActive {
+    transform: scale(1);
+    transition: transform 1000ms ease;
+}
+.transitionExit {
+    transform: scale(1);
+}
+.transitionExitActive {
+    transform: scale(0);
+    transition: transform 1000ms ease;
+}
