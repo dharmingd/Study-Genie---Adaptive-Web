@@ -1,0 +1,52 @@
+.singleNoteModal{
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    right: 25%;
+    height: auto;
+    border: none;
+    box-shadow: 0 0 10px #ABB2B9;
+    background-color: white;
+    transition: 0.4s;
+    color: black;
+    //padding-bottom: 20px;
+    z-index: 999;
+}
+.singleNoteOverlayModal{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("singleNoteModalBack.png");
+    //background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.singleNoteTitleText{
+    border: none;
+    font-size: 1.5em;
+    background: transparent;
+    color: white;
+    font-weight: bold;
+    width: 70%;
+}
+
+.singleNoteTitleWrapper{
+    background-color: #424242;
+    padding: 10px;
+    color: white;
+}
+
+.tagIconSingle{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    color: #424242;
+}
+
+.tagIconSingle:hover{
+    cursor: pointer;
+}
