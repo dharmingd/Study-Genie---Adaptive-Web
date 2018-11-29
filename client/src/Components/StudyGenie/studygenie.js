@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import image from '../../study.png';
+import signin from '../../signIn.png';
 import './study.css';
 
 class StudyGenie extends Component{
     render(){
         return (
-            <div class="page">
+            <div className="page">
                 <div className="left">
                     <img src={image} className="img"/>
                 </div>
@@ -20,6 +21,10 @@ class StudyGenie extends Component{
                     <div>
                         View your top recommendations, favourite the notes you find useful,
                         find notes based on your useful topics!.
+                    </div>
+                    <br/><br/>
+                    <div>
+                        <img src={signin} className="signIn"/>
                     </div>
                 </div>
                 
