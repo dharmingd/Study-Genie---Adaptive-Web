@@ -1,0 +1,27 @@
+.userDetails{
+    margin-top: 100px;
+}
+
+.uprofilePic{
+    border-radius: 100%;
+}
+
+.leftUserDetails{
+    text-align: right;
+    padding-right: 50px;
+    border-right: 1px solid #D5D8DC;
+}
+
+.userName{
+    font-size: 2em;
+    margin-top: 20px;
+    color: #1976d2;
+}
+
+.userEmail{
+    color: #808B96;
+}
+
+.rightUserDetails{
+    padding-left: 50px;
+}
