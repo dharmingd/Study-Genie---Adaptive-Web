@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const noteSchema = new Schema({
@@ -33,3 +34,4 @@ const noteSchema = new Schema({
   timeStamp: { type: Date, default: Date.now }
 });
 mongoose.model("notes", noteSchema);
+
