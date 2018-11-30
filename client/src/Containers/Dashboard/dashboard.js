@@ -15,7 +15,6 @@ class Dashboard extends Component{
     }
 
     changeWidth = (val) => {
-        console.log("hereee");
         let bar = document.getElementById("menu");
         let rest = document.getElementById("rest");
         if(val){

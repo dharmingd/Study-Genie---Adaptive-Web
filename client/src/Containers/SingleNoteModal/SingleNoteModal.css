@@ -1,6 +1,6 @@
 .singleNoteModal{
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 30%;
     right: 25%;
     height: auto;
@@ -40,13 +40,69 @@
 }
 
 .tagIconSingle{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
     font-size: 1.2em;
-    color: #424242;
+    color: #D7DBDD;
+    margin-top: 3px;
 }
 
 .tagIconSingle:hover{
+    cursor: pointer;
+}
+
+.shareNoteWrapper{
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+}
+
+.shareNoteMessageWrapper{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.shareNoteBtn{
+    background-color: #58D68D;
+    border: 1px solid #58D68D;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.4s;
+}
+
+.shareNoteBtn:hover{
+    background-color: white;
+    color: #58D68D;
+    cursor: pointer;
+}
+
+.saveChangesBtnWrapper{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.saveMsg{
+    color: #58D68D;
+    font-weight: bold;
+    margin-right: 5px;
+    font-size: 0.8em;
+}
+
+.saveChangesBtn{
+    background-color: #58D68D;
+    border:1px solid #58D68D;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 3px 5px;
+    transition: 0.4s;
+}
+
+.saveChangesBtn:hover{
+    background-color: white;
+    color: #58D68D;
     cursor: pointer;
 }

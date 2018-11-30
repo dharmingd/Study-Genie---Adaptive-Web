@@ -1,4 +1,5 @@
-import { POST_NOTE } from '../Actions/types';
+import { POST_NOTE,POST_LIKE } from '../Actions/types';
+import _ from 'lodash';
 
 export default function(state = null, action) {
     //console.log(action);

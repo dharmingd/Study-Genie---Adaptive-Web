@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_USER, POST_USER_DETAILS, POST_NOTE, FETCH_USERS, POST_GROUP, GET_GROUP, GET_POST_PUBLIC} from './types';
+import {FETCH_USER, POST_USER_DETAILS, POST_NOTE, FETCH_USERS, POST_GROUP, GET_GROUP, GET_POST_PUBLIC, SHARE_POST, POST_LIKE, REMOVE_LIKE, POST_FAVORITE, REMOVE_FAVORITE, UPDATE_NOTE} from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -36,5 +36,40 @@ export const getGroup = () => async dispatch =>{
 
 export const getNotePublic = () => async dispatch =>{
   const res = await axios.get('/api/note/public');
+    console.log(res.data);
   dispatch({type: GET_POST_PUBLIC, payload: res.data})
+}
+
+export const shareNote = (data) => async dispatch => {
+  const res = await axios.put('/api/post/update/group', data);
+  dispatch({type: SHARE_POST, payload: res.data})
+}
+
+export const postLike = (data) => async dispatch =>{
+  const res = await axios.post('/api/like', data);
+  dispatch({type: POST_LIKE, payload: res.data._note});
+}
+
+export const removeLike = (data) => async dispatch =>{
+    //console.log(data);
+  const res = await axios.put('/api/like', data);
+  dispatch({type: REMOVE_LIKE, payload:data._note});
+}
+
+export const postFavorite = (data) => async dispatch =>{
+    const res = await axios.post('/api/favorite', data);
+    dispatch({type: POST_FAVORITE, payload: res.data._note});
+}
+
+export const removeFavorite = (data) => async dispatch =>{
+    //console.log(data);
+    const res = await axios.put('/api/favorite', data);
+    dispatch({type: REMOVE_FAVORITE, payload:data._note});
+}
+
+export const updateNote = (data) => async dispatch =>{
+    //console.log(data);
+    const res = await axios.put('/api/post', data);
+    console.log(res.data);
+    dispatch({type: UPDATE_NOTE, payload:res.data});
 }
