@@ -96,7 +96,7 @@ module.exports = app => {
     });
   });
 
-  app.get("/api/note/public", async (req, res) => {
+  app.get("/api/note/public", requireLogin,async (req, res) => {
     const notes = await Note.find(
       {
         status: "Public"
@@ -139,4 +139,47 @@ module.exports = app => {
         res.status(401).send();
       });
   });
+    app.get("/api/note/own", requireLogin,async (req, res) => {
+        const notes = await Note.find(
+            {
+                _user: req.user._id
+            },
+            [],
+            {
+                sort: {
+                    timeStamp: -1
+                }
+            }
+        )
+            .then(async notes => {
+                const newNotes = notes.map(async note => {
+                    let newNote = { ...note._doc };
+                    const like = await Like.find({
+                        _user: req.user._id,
+                        _note: note._id
+                    });
+                    if (like.length === 0) {
+                        newNote["isLiked"] = "false";
+                    } else {
+                        newNote["isLiked"] = "true";
+                    }
+                    const favorite = await Favorite.find({
+                        _user: req.user._id,
+                        _note: note._id
+                    });
+                    if (favorite.length === 0) {
+                        newNote["isFavorite"] = "false";
+                    } else {
+                        newNote["isFavorite"] = "true";
+                    }
+
+                    return newNote;
+                });
+                const newNoteArray = await Promise.all(newNotes);
+                res.send(newNoteArray);
+            })
+            .catch(e => {
+                res.status(401).send();
+            });
+    });
 };

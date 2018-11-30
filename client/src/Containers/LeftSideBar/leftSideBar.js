@@ -88,7 +88,7 @@ class LeftSideBar extends Component {
         </div>
         <div className="iconCategory">
           <NavLink
-            to="/user/private"
+            to="/user/mynotes"
             className="navlink"
             activeClassName="selectedNavBarLink"
           >

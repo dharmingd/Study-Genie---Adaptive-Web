@@ -1,10 +1,10 @@
-import {GET_POST_PUBLIC, POST_LIKE, POST_NOTE, REMOVE_LIKE, POST_FAVORITE, REMOVE_FAVORITE, UPDATE_NOTE} from '../Actions/types';
+import {FETCH_NOTES, POST_LIKE, POST_NOTE, REMOVE_LIKE, POST_FAVORITE, REMOVE_FAVORITE, UPDATE_NOTE} from '../Actions/types';
 import _ from "lodash";
 
 export default function(state = null, action) {
     //console.log(action);
     switch (action.type) {
-        case GET_POST_PUBLIC:
+        case FETCH_NOTES:
             return _.mapKeys(action.payload, '_id');
         case POST_NOTE:
             return {[action.payload._id]:action.payload , ...state};

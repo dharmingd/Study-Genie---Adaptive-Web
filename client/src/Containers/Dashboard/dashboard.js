@@ -6,6 +6,7 @@ import './dashboard.css';
 import UserDetails from '../UserDetails/UserDetails';
 import NewNotes from '../NewNotes/NewNotes';
 import PublicNotes from '../PublicNotes/PublicNotes';
+import MyNotes from '../MyNotes/MyNotes';
 
 
 class Dashboard extends Component{
@@ -46,7 +47,7 @@ class Dashboard extends Component{
                                 <div className='col-md-12'>
                                     <Route path={`${this.props.match.path}/details`} component={UserDetails} />
                                     <Route path={`${this.props.match.path}/public`} component={PublicNotes} />
-                                    <Route path={`${this.props.match.path}/private`} component={UserDetails} />
+                                    <Route path={`${this.props.match.path}/mynotes`} component={MyNotes} />
                                 </div>
                             </div>
 
