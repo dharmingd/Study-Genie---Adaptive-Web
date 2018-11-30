@@ -7,6 +7,7 @@ import UserDetails from '../UserDetails/UserDetails';
 import NewNotes from '../NewNotes/NewNotes';
 import PublicNotes from '../PublicNotes/PublicNotes';
 import MyNotes from '../MyNotes/MyNotes';
+import SavedNotes from '../SavedNotes/SavedNotes';
 
 
 class Dashboard extends Component{
@@ -48,6 +49,7 @@ class Dashboard extends Component{
                                     <Route path={`${this.props.match.path}/details`} component={UserDetails} />
                                     <Route path={`${this.props.match.path}/public`} component={PublicNotes} />
                                     <Route path={`${this.props.match.path}/mynotes`} component={MyNotes} />
+                                    <Route path={`${this.props.match.path}/saved`} component={SavedNotes} />
                                 </div>
                             </div>
 

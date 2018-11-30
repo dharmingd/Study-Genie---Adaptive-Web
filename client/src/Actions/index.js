@@ -59,6 +59,11 @@ export const getNoteOwn = () => async dispatch => {
     dispatch({ type: FETCH_NOTES, payload: res.data });
 };
 
+export const getSavedPost = () => async dispatch => {
+    const res = await axios.get("/api/note/saved");
+    dispatch({ type: FETCH_NOTES, payload: res.data });
+};
+
 export const shareNote = data => async dispatch => {
   const res = await axios.put("/api/post/update/group", data);
   dispatch({ type: SHARE_POST, payload: res.data });
