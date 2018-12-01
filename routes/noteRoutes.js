@@ -214,4 +214,87 @@ module.exports = app => {
                 res.status(401).send();
             });
     });
+
+    app.get("/api/note/saved",requireLogin,async (req, res) => {
+        const notes = await Favorite.find(
+            {
+                _user: req.user._id,
+            }
+        ).populate('_note').select("-_id -_user +_note")
+            .then(async notes => {
+                const newNotes = notes.map(async note => {
+                    let temp = { ...note._doc };
+                    let newNote = {...temp._note._doc};
+
+                    const like = await Like.find({
+                        _user: req.user._id,
+                        _note: newNote._id
+                    });
+                    if (like.length === 0) {
+                        newNote["isLiked"] = "false";
+                    } else {
+                        newNote["isLiked"] = "true";
+                    }
+                    newNote["isFavorite"] = "true";
+                    return newNote;
+                });
+                const newNoteArray = await Promise.all(newNotes);
+                res.send(newNoteArray);
+            })
+            .catch(e => {
+                console.log(e);
+                res.status(401).send();
+            });
+    });
+
+    app.get("/api/note/cheatsheets", requireLogin,async (req, res) => {
+        const notes = await Note.find(
+            {
+                $or: [{
+                    status: "Public",
+                    category: "Cheat Sheet"
+                },{
+                    status: "private",
+                    category: "Cheat Sheets",
+                    _user: req.user._id
+                }]
+            },
+            [],
+            {
+                sort: {
+                    timeStamp: -1
+                }
+            }
+        )
+            .then(async notes => {
+                const newNotes = notes.map(async note => {
+                    let newNote = { ...note._doc };
+                    const like = await Like.find({
+                        _user: req.user._id,
+                        _note: note._id
+                    });
+                    if (like.length === 0) {
+                        newNote["isLiked"] = "false";
+                    } else {
+                        newNote["isLiked"] = "true";
+                    }
+                    const favorite = await Favorite.find({
+                        _user: req.user._id,
+                        _note: note._id
+                    });
+                    if (favorite.length === 0) {
+                        newNote["isFavorite"] = "false";
+                    } else {
+                        newNote["isFavorite"] = "true";
+                    }
+
+                    return newNote;
+                });
+                const newNoteArray = await Promise.all(newNotes);
+                res.send(newNoteArray);
+            })
+            .catch(e => {
+                res.status(401).send();
+            });
+    });
 };

@@ -15,6 +15,12 @@ class SavedNotes extends Component {
     render() {
         return (
             <div>
+                <div className='ListTitle'>
+                    Saved Notes
+                </div>
+                <div className='ListSubTitle'>
+                    List of the notes saved by your
+                </div>
                 <ListNotes />
             </div>
         );

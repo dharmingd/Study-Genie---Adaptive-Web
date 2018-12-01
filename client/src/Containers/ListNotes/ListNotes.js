@@ -21,6 +21,7 @@ class ListNotes extends Component {
     this.removeLiked = this.removeLiked.bind(this);
     this.removeFavorited = this.removeFavorited.bind(this);
     this.submitFavorite = this.submitFavorite.bind(this);
+    this.renderCheatSheet = this.renderCheatSheet.bind(this);
   }
 
   componentDidMount() {}
@@ -82,9 +83,10 @@ class ListNotes extends Component {
     this.props.removeFavorite(data);
   }
 
-  renderNote() {
-    console.log(this.props.notes);
-    return _.map(this.props.notes, note => {
+  renderNote(notes) {
+
+    console.log(notes);
+    return _.map(notes, note => {
       const noteListTitleWrapper = {
         backgroundColor: "#424242",
         color: "white",
@@ -173,6 +175,19 @@ class ListNotes extends Component {
     });
   }
 
+    renderCheatSheet(){
+      if(this.props.isOwner===true){
+        const notes = _.map(this.props.notes, (note)=>{
+          if(note._user === this.props.auth._id) return note;
+        });
+        return this.renderNote(_.without(notes, undefined));
+      }
+        const notes = _.map(this.props.notes, (note)=>{
+            if(note._user !== this.props.auth._id) return note;
+        });
+        return this.renderNote(_.without(notes, undefined));
+    }
+
   render() {
     if (this.props.notes === null) {
       return <div>Loading..</div>;
@@ -181,7 +196,7 @@ class ListNotes extends Component {
       <StyleRoot>
         <Flipper flipKey="abcd">
           <div className="row noteListMainWrapper">
-            {this.renderNote()}
+              {this.props.isCheatSheet===true ? this.renderCheatSheet() : this.renderNote(this.props.notes)}
             {this.renderNoteModal()}
           </div>
         </Flipper>
@@ -190,8 +205,8 @@ class ListNotes extends Component {
   }
 }
 
-function mapStateToProps({ notes }) {
-  return { notes };
+function mapStateToProps({ notes, auth }) {
+  return { notes, auth };
 }
 
 export default connect(
