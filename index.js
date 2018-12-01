@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 require("./models/User");
 require("./models/Note");
 require("./models/Group");
+require("./models/Like");
+require("./models/Favorite");
 require("./services/passport");
 
 mongoose.connect(keys.mongodbURI);
@@ -28,15 +30,12 @@ require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);
 require("./routes/noteRoutes")(app);
 require("./routes/groupRoutes")(app);
-
+require("./routes/likeRoutes")(app);
+require("./routes/favoriteRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
-    //express will serve up production assests like our main.js/main.css file
     const path = require("path");
     app.use(express.static(path.join(__dirname, "/client/build")));
-
-    //express will serve up the index.html file if it doesn't recognize the route
-
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });

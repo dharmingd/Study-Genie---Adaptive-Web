@@ -24,7 +24,7 @@ class LandingPage extends Component {
                       find notes based on your useful topics!.
                   </div>
                   <br/><br/>
-                  <div>
+                  <div className='center'>
                       <a href="/auth/google"><img src={signin} className="signIn"/></a>
                   </div>
               </div>

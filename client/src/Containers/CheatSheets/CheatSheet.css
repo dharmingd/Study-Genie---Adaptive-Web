@@ -1,0 +1,13 @@
+.ListTitle{
+    padding-left: 15px;
+    color: #ABB2B9;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.ListSubTitle{
+    padding-left: 15px;
+    color: #ABB2B9;
+    font-size: 0.9em;
+}

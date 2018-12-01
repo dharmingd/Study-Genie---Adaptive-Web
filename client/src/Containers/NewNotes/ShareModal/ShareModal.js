@@ -201,6 +201,14 @@ class ShareModal extends Component {
                       <i className="far fa-times-circle modalClodeBtnIcon"/>
                   </button>
               </div>
+              {this.props.shareButton && (
+                  <div className='shareNoteWrapper'>
+                      <button onClick={this.props.shareNoteBtn} className='shareNoteBtn'>Share Note</button>
+                  </div>
+              )}
+              {this.props.showShareMessage && <div className="groupCreatedMsg shareNoteMessageWrapper">
+                  Post has been shared with selected groups!
+              </div>}
           </Modal>
         </div>
       </StyleRoot>

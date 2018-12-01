@@ -6,7 +6,9 @@ import './dashboard.css';
 import UserDetails from '../UserDetails/UserDetails';
 import NewNotes from '../NewNotes/NewNotes';
 import PublicNotes from '../PublicNotes/PublicNotes';
-
+import MyNotes from '../MyNotes/MyNotes';
+import SavedNotes from '../SavedNotes/SavedNotes';
+import CheatSheet from '../CheatSheets/CheatSheet';
 
 class Dashboard extends Component{
 
@@ -15,7 +17,6 @@ class Dashboard extends Component{
     }
 
     changeWidth = (val) => {
-        console.log("hereee");
         let bar = document.getElementById("menu");
         let rest = document.getElementById("rest");
         if(val){
@@ -47,7 +48,9 @@ class Dashboard extends Component{
                                 <div className='col-md-12'>
                                     <Route path={`${this.props.match.path}/details`} component={UserDetails} />
                                     <Route path={`${this.props.match.path}/public`} component={PublicNotes} />
-                                    <Route path={`${this.props.match.path}/private`} component={UserDetails} />
+                                    <Route path={`${this.props.match.path}/mynotes`} component={MyNotes} />
+                                    <Route path={`${this.props.match.path}/saved`} component={SavedNotes} />
+                                    <Route path={`${this.props.match.path}/cheatsheets`} component={CheatSheet} />
                                 </div>
                             </div>
 
