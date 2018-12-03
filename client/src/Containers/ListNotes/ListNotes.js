@@ -100,9 +100,16 @@ class ListNotes extends Component {
       };
       console.log(note.isLiked);
 
+      let className;
+      if(this.props.isGroup){
+        className = "col-md-4 groupListMargin";
+      }else{
+        className ="col-md-3";
+      }
+
       return (
         <div
-          className="col-md-3"
+          className={className}
           onClick={() => this.openSingleNoteModal(note)}
           key={note._id}
         >
@@ -192,6 +199,11 @@ class ListNotes extends Component {
     if (this.props.notes === null) {
       return <div>Loading..</div>;
     }
+    console.log(_.size(this.props.notes));
+    if(_.size(this.props.notes)===0){
+      return <div className='noPost'>There are no notes posted.</div>
+    }
+
     return (
       <StyleRoot>
         <Flipper flipKey="abcd">

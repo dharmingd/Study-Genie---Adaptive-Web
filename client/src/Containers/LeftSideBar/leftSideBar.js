@@ -75,7 +75,7 @@ class LeftSideBar extends Component {
         }
         <div className="iconCategory">
           <NavLink
-            to="/user/public"
+            to="/user/public/notes"
             className="navlink"
             activeClassName="selectedNavBarLink"
             index={true}
@@ -134,6 +134,34 @@ class LeftSideBar extends Component {
             {this.state.show && <div className="category">Collaborative Notes</div>}
           </NavLink>
         </div>
+          <div className='lineHoOuter'>
+        <hr className='lineHo'/>
+          </div>
+          <div className="iconCategory">
+              <NavLink
+                  to="/user/public/groups"
+                  className="navlink"
+                  activeClassName="selectedNavBarLink"
+              >
+                  <div className="icon groupWorkIconPadding">
+                      <i className="material-icons groupWorkIcon">group_add</i>
+                  </div>
+                  {this.state.show && <div className="category">Public Groups</div>}
+              </NavLink>
+          </div>
+          <div className="iconCategory">
+              <NavLink
+                  exact
+                  to="/user/my/groups"
+                  className="navlink"
+                  activeClassName="selectedNavBarLink"
+              >
+                  <div className="icon groupWorkIconPadding">
+                      <i className="material-icons groupWorkIcon">group_work</i>
+                  </div>
+                  {this.state.show && <div className="category">My Groups</div>}
+              </NavLink>
+          </div>
       </div>
     );
   }

@@ -106,3 +106,24 @@
     color: #58D68D;
     cursor: pointer;
 }
+
+.deleteBtn{
+    margin-left: 5px;
+    background-color: #EC7063;
+    border:1px solid #EC7063;
+}
+
+.deleteBtn:hover{
+    background-color: white;
+    color: #EC7063;
+    cursor: pointer;
+}
+
+.deltetedMsg{
+    padding: 10%;
+    text-align: center;
+    color: #EC7063;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+

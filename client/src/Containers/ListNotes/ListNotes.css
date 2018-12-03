@@ -3,7 +3,7 @@
 }
 
 .noteListWrapper{
-    margin-top: 5px;
+    margin-top: 10px;
     box-shadow: 0 0 20px #D5D8DC;
     border-radius: 1px;
 }
@@ -125,4 +125,15 @@
 .transitionExitActive {
     transform: scale(0);
     transition: transform 1000ms ease;
+}
+
+.groupListMargin{
+    padding: 5px;
+}
+
+.noPost{
+    text-align: center;
+    margin-top: 10%;
+    font-size: 1.5em;
+    color: #99A3A4;
 }
