@@ -1,0 +1,90 @@
+.groupDisplayWrapper{
+    margin-top: 10px;
+}
+
+.groupUserPic{
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.groupMemberWrapperMain{
+    border-left: 0.5px solid #D5D8DC;
+    padding-left: 20px;
+}
+
+.groupListWrapperMain{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.groupMemberWrapper{
+   padding: 10px 0;
+    border-bottom: 0.5px solid #D5D8DC;
+}
+
+.groupMembers{
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #D5D8DC;
+}
+
+.groupMemberName{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #707B7C;
+}
+
+.groupMemberEmail{
+    font-size: 0.8em;
+}
+
+.owner{
+    margin-left: 2px;
+    font-size: 0.7em;
+    background-color: #5DADE2;
+    border-radius: 3px;
+    color: white;
+    padding: 0 3px;
+}
+
+.groupTitle{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #424242;
+    //padding-left: 10px;
+}
+
+.createdBy{
+    //padding-left: 10px;
+    font-size: 0.9em;
+}
+
+.joinButtonWraaper{
+    margin-top: 10px;
+}
+
+.joinButton{
+    background-color: #28B463;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #28B463;
+    transition: 0.4s;
+}
+
+.joinButton:hover{
+    background-color: white;
+    color: #28B463;
+}
+
+.leaveButton{
+    background-color: #EC7063;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #EC7063;
+    transition: 0.4s;
+}
+
+.leaveButton:hover{
+    background-color: white;
+    color: #EC7063;
+}
