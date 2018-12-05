@@ -15,6 +15,12 @@ import {
   UPDATE_NOTE,
   UPDATE_FILTER,
   UPDATE_SORT
+    GET_GROUPS,
+    GET_ONE_GROUP,
+    JOIN_GROUP,
+    LEAVE_GROUP,
+    DELETE_GROUP,
+    DELETE_NOTE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -105,6 +111,7 @@ export const updateNote = data => async dispatch => {
   dispatch({ type: UPDATE_NOTE, payload: res.data });
 };
 
+
 export const updateFilter = data => {
   return { type: UPDATE_FILTER, payload: data};
 }
@@ -113,3 +120,45 @@ export const updateSort = data => {
   return { type: UPDATE_SORT, payload: data};
 }
 
+export const getPublicGroups = () => async dispatch => {
+    //console.log(data);
+    const res = await axios.get("/api/group/public");
+    console.log(res.data);
+    dispatch({ type: GET_GROUPS, payload: res.data });
+};
+
+export const getMyGroups = () => async dispatch => {
+    const res = await axios.get("/api/group/my");
+    dispatch({ type: GET_GROUPS, payload: res.data });
+};
+
+export const getOneGroup = (data) => async dispatch =>{
+    const res = await axios.post("/api/group/one", data);
+    dispatch({type: GET_ONE_GROUP, payload: res.data});
+}
+
+export const getGroupNotes = (data) => {
+    return {type: FETCH_NOTES, payload: data}
+}
+
+export const joinGroupAction = (data)=> async dispatch =>{
+    const res = await axios.post("/api/group/join", data);
+    dispatch({type: JOIN_GROUP, payload: data});
+}
+
+export const leaveGroupAction = (data)=> async dispatch =>{
+    const res = await axios.post("/api/group/leave", data);
+    dispatch({type: LEAVE_GROUP, payload: data});
+}
+
+export const deleteNoteAction = (data, history)=> async dispatch =>{
+    const res = await axios.put("/api/note/delete", data);
+    dispatch({type: DELETE_NOTE, payload: res.data});
+    history.push('/user/mynotes');
+}
+
+export const deleteGroupAction = (data, history)=> async dispatch =>{
+    const res = await axios.put("/api/group/delete", data);
+    dispatch({type: DELETE_GROUP, payload: data});
+    history.push('/user/my/groups');
+}

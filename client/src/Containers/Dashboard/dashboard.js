@@ -9,6 +9,9 @@ import PublicNotes from '../PublicNotes/PublicNotes';
 import MyNotes from '../MyNotes/MyNotes';
 import SavedNotes from '../SavedNotes/SavedNotes';
 import CheatSheet from '../CheatSheets/CheatSheet';
+import PublicGroups from '../PublicGroups/PublicGroups';
+import SingleGroups from '../SingleGroups/SingleGroups';
+import MyGroups from '../MyGroups/MyGroups';
 
 class Dashboard extends Component{
 
@@ -47,10 +50,13 @@ class Dashboard extends Component{
                             <div className='row'>
                                 <div className='col-md-12'>
                                     <Route path={`${this.props.match.path}/details`} component={UserDetails} />
-                                    <Route path={`${this.props.match.path}/public`} component={PublicNotes} />
+                                    <Route exact path={`${this.props.match.path}/public/notes`} component={PublicNotes} />
                                     <Route path={`${this.props.match.path}/mynotes`} component={MyNotes} />
                                     <Route path={`${this.props.match.path}/saved`} component={SavedNotes} />
                                     <Route path={`${this.props.match.path}/cheatsheets`} component={CheatSheet} />
+                                    <Route exact path={`${this.props.match.path}/public/groups`} component={PublicGroups} />
+                                    <Route exact path={`${this.props.match.path}/groups/:id`} component={SingleGroups} />
+                                    <Route exact path={`${this.props.match.path}/my/groups`} component={MyGroups} />
                                 </div>
                             </div>
 

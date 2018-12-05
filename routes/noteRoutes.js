@@ -190,8 +190,12 @@ module.exports = app => {
             }
         ).populate('_note').select("-_id -_user +_note")
             .then(async notes => {
+                //console.log(notes);
                 const newNotes = notes.map(async note => {
+                    console.log(note._note);
+                    if(note._note!== null){
                     let temp = { ...note._doc };
+                    //console.log(temp);
                     let newNote = {...temp._note._doc};
 
                     const like = await Like.find({
@@ -205,9 +209,16 @@ module.exports = app => {
                     }
                     newNote["isFavorite"] = "true";
                     return newNote;
+                    }
                 });
                 const newNoteArray = await Promise.all(newNotes);
-                res.send(newNoteArray);
+
+                console.log(newNoteArray);
+                res.send(newNoteArray.filter((note)=>{
+                    if(note!==undefined){
+                        return note
+                    }
+                }));
             })
             .catch(e => {
                 console.log(e);
@@ -297,4 +308,16 @@ module.exports = app => {
                 res.status(401).send();
             });
     });
+
+    app.put('/api/note/delete',requireLogin, (req, res)=>{
+        const {_id} = req.body;
+        Note.findOneAndDelete({
+            _id,
+            _user: req.user._id
+        }).then((note)=>{
+            res.send(note);
+        }).catch((e)=>{
+            res.status(401).send();
+        })
+    })
 };
