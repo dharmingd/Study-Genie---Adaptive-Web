@@ -41,7 +41,7 @@ class SingleNoteModal extends Component {
     };
 
     this.props.getGroup().then(() => {
-      console.log(this.props.groups);
+      console.log(this.props.groups+'');
       this.props.groups.map(group => {
         this.state.map.set(group._id, false);
       });
