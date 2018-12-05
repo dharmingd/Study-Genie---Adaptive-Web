@@ -59,7 +59,6 @@ class Dashboard extends Component{
                                     <Route exact path={`${this.props.match.path}/my/groups`} component={MyGroups} />
                                 </div>
                             </div>
-
                     </div>
                 </div>
             </div>

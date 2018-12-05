@@ -320,4 +320,19 @@ module.exports = app => {
             res.status(401).send();
         })
     })
+
+    app.get('/api/cheetsheets/list', requireLogin, (req, res)=>{
+
+        Note.find({
+            _owner: req.user._id,
+            category: 'Cheat Sheet'
+        }).select('+title').then((cheatsheets)=>{
+            res.send(cheatsheets);
+        }).catch(e=>{
+            res.status(401).send();
+        })
+
+    })
 };
+
+

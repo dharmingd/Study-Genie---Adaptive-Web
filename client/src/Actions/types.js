@@ -17,3 +17,4 @@ export const JOIN_GROUP = "JOIN_GROUP";
 export const LEAVE_GROUP = "LEAVE_GROUP";
 export const DELETE_NOTE = "DELTE_NOTE";
 export const DELETE_GROUP = "DELTE_GROUP";
+export const FETCH_CHEATSHEETS = "FETCH_CHEATSHEETS";

@@ -18,7 +18,8 @@ import {
     JOIN_GROUP,
     LEAVE_GROUP,
     DELETE_GROUP,
-    DELETE_NOTE
+    DELETE_NOTE,
+    FETCH_CHEATSHEETS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {

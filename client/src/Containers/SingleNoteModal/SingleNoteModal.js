@@ -7,6 +7,7 @@ import * as actions from "../../Actions";
 import ShareModal from "../NewNotes/ShareModal/ShareModal";
 import { withRouter } from "react-router";
 import axios from "axios/index";
+import Popup from '../../Components/Popup/popup';
 
 class SingleNoteModal extends Component {
   constructor(props) {
@@ -18,18 +19,22 @@ class SingleNoteModal extends Component {
       showShareModal: false,
       showShareMessage: false,
       showUpdateNoteMsg: false,
-        isDeleted: false
+      isDeleted: false,
+      showPopup: false,
+        hideElement: false
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.renderShareModal = this.renderShareModal.bind(this);
     this.shareNoteBtn = this.shareNoteBtn.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       note: this.props.note
+        //hideElement: true
     });
 
     const data = {
@@ -43,23 +48,41 @@ class SingleNoteModal extends Component {
         this.state.map.set(group._id, false);
       });
     });
+      console.log(document.getElementById("popup"));
+      this.refs["popup"].findDOMNode().style.display = "none";
+      //document.getElementById("popup").style.display = "none";
   }
+  handleFocus() {
+    this.setState({ showPopup: true, hideElement: true });
+  }
+
+  changePosition = (x, y) => {
+    console.log(x, y);
+    document.getElementById("popup").style.display = "block";
+    var d = document.getElementById("popup");
+    d.style.position = "fixed";
+    d.style.left = x + "px";
+    d.style.top = y - 60 + "px";
+  };
+
   async deleteNote(event) {
     event.preventDefault();
     event.stopPropagation();
-      const res = await axios.put("/api/note/delete", {_id: this.props.notes[this.props.note]._id});
-      this.setState({
-          isDeleted: true
-      })
-      const pathname = this.props.history.location.pathname;
-      console.log(this.props.history.location.pathname);
-      if(pathname==='/user/mynotes'){
-          this.props.getNoteOwn();
-      }else if(pathname==='/user/public/notes'){
-            this.props.getNotePublic();
-      }else if(pathname==='/user/saved'){
-            this.props.getSavedPost();
-      }
+    const res = await axios.put("/api/note/delete", {
+      _id: this.props.notes[this.props.note]._id
+    });
+    this.setState({
+      isDeleted: true
+    });
+    const pathname = this.props.history.location.pathname;
+    console.log(this.props.history.location.pathname);
+    if (pathname === "/user/mynotes") {
+      this.props.getNoteOwn();
+    } else if (pathname === "/user/public/notes") {
+      this.props.getNotePublic();
+    } else if (pathname === "/user/saved") {
+      this.props.getSavedPost();
+    }
   }
 
   handleCloseModal() {
@@ -142,6 +165,15 @@ class SingleNoteModal extends Component {
     console.log(note);
 
     return (
+        <div>
+            <div className="page" onClick={this.handleFocus}>
+                <div id="popup" ref="popup">
+                    <Popup
+                        selection={window.getSelection()}
+                        fromPopup={this.changePosition}
+                    />
+                </div>
+            </div>
       <Modal
         isOpen={this.state.isOpen}
         ariaHideApp={false}
@@ -154,128 +186,130 @@ class SingleNoteModal extends Component {
         //closeTimeoutMS={1000}
       >
         {this.state.isDeleted ? (
-          <div className='deltetedMsg'>Your Post has been deleted</div>
+          <div className="deltetedMsg">Your Post has been deleted</div>
         ) : (
-          <form onSubmit={this.saveChanges}>
-            <div className="row singleNoteTitleWrapper">
-              <div className="col-md-10 singleNoteTitle">
-                <input
-                  autoFocus
-                  defaultValue={note.title}
-                  id="title"
-                  readOnly={this.props.auth._id !== note._user}
-                  className="singleNoteTitleText"
-                />
-              </div>
-              <div className="col-md-2">
-                <div className="row">
-                  <div className="col-md-4">
-                    {note.isFavorite === "true" ? (
+            <form onSubmit={this.saveChanges}>
+
+              <div className="row singleNoteTitleWrapper">
+                <div className="col-md-10 singleNoteTitle">
+                  <input
+                    autoFocus
+                    defaultValue={note.title}
+                    id="title"
+                    readOnly={this.props.auth._id !== note._user}
+                    className="singleNoteTitleText"
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="row">
+                    <div className="col-md-4">
+                      {note.isFavorite === "true" ? (
+                        <i
+                          className="material-icons heart"
+                          style={thumbsUp}
+                          onClick={event =>
+                            this.props.removeFavorited(event, note._id)
+                          }
+                        >
+                          favorite
+                        </i>
+                      ) : (
+                        <i
+                          className="material-icons heart"
+                          onClick={event =>
+                            this.props.submitFavorite(event, note._id)
+                          }
+                        >
+                          favorite_border
+                        </i>
+                      )}
+                    </div>
+                    <div className="col-md-6">
+                      {note.isLiked === "true" ? (
+                        <i
+                          className="fa fa-thumbs-up thumbsUp"
+                          style={thumbsUp}
+                          onClick={event =>
+                            this.props.removeLiked(event, note._id)
+                          }
+                        />
+                      ) : (
+                        <i
+                          className="fa fa-thumbs-o-up thumbsUp"
+                          onClick={event =>
+                            this.props.submitLike(event, note._id)
+                          }
+                        />
+                      )}
+                      <div className="iconText">{note.numberOfLikes || 0}</div>
+                    </div>
+                    <div className="col-md-2">
                       <i
-                        className="material-icons heart"
-                        style={thumbsUp}
-                        onClick={event =>
-                          this.props.removeFavorited(event, note._id)
-                        }
+                        className="material-icons tagIconSingle"
+                        aria-hidden="true"
+                        id="shareTootltip"
+                        onClick={() => {
+                          this.setState({
+                            showShareModal: !this.state.showShareModal
+                          });
+                        }}
                       >
-                        favorite
+                        share
                       </i>
-                    ) : (
-                      <i
-                        className="material-icons heart"
-                        onClick={event =>
-                          this.props.submitFavorite(event, note._id)
-                        }
-                      >
-                        favorite_border
-                      </i>
-                    )}
-                  </div>
-                  <div className="col-md-6">
-                    {note.isLiked === "true" ? (
-                      <i
-                        className="fa fa-thumbs-up thumbsUp"
-                        style={thumbsUp}
-                        onClick={event =>
-                          this.props.removeLiked(event, note._id)
-                        }
-                      />
-                    ) : (
-                      <i
-                        className="fa fa-thumbs-o-up thumbsUp"
-                        onClick={event =>
-                          this.props.submitLike(event, note._id)
-                        }
-                      />
-                    )}
-                    <div className="iconText">{note.numberOfLikes || 0}</div>
-                  </div>
-                  <div className="col-md-2">
-                    <i
-                      className="material-icons tagIconSingle"
-                      aria-hidden="true"
-                      id="shareTootltip"
-                      onClick={() => {
-                        this.setState({
-                          showShareModal: !this.state.showShareModal
-                        });
-                      }}
-                    >
-                      share
-                    </i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <TextareaAutosize
-              placeholder="Add a Note..."
-              style={nTextarea}
-              innerRef={ref => (this.textarea = ref)}
-              defaultValue={note.content}
-              id="content"
-              readOnly={this.props.auth._id !== note._user}
-            />
-            <div>
-              {note.tags.map((tag, index) => (
-                <div className="nodeListTag" key={index}>
-                  {tag}
-                </div>
-              ))}
-              {note.category === "Note" ? (
-                <div className="nodeListTag nodeListCategoryNote">
-                  {note.category}
-                </div>
-              ) : (
-                <div className="nodeListTag nodeListCategoryCheatsheet">
-                  {note.category}
+              <TextareaAutosize
+                placeholder="Add a Note..."
+                style={nTextarea}
+                innerRef={ref => (this.textarea = ref)}
+                defaultValue={note.content}
+                id="content"
+                readOnly={this.props.auth._id !== note._user}
+              />
+              <div>
+                {note.tags.map((tag, index) => (
+                  <div className="nodeListTag" key={index}>
+                    {tag}
+                  </div>
+                ))}
+                {note.category === "Note" ? (
+                  <div className="nodeListTag nodeListCategoryNote">
+                    {note.category}
+                  </div>
+                ) : (
+                  <div className="nodeListTag nodeListCategoryCheatsheet">
+                    {note.category}
+                  </div>
+                )}
+              </div>
+
+              {this.props.auth._id === note._user && (
+                <div className="saveChangesBtnWrapper">
+                  {this.state.showUpdateNoteMsg && (
+                    <span className="saveMsg">Saved!</span>
+                  )}
+                  <input
+                    type="submit"
+                    value="Save Changes"
+                    className="saveChangesBtn"
+                  />
+                  <button
+                    onClick={this.deleteNote}
+                    type="button"
+                    className="saveChangesBtn deleteBtn"
+                  >
+                    Delete Note
+                  </button>
                 </div>
               )}
-            </div>
-
-            {this.props.auth._id === note._user && (
-              <div className="saveChangesBtnWrapper">
-                {this.state.showUpdateNoteMsg && (
-                  <span className="saveMsg">Saved!</span>
-                )}
-                <input
-                  type="submit"
-                  value="Save Changes"
-                  className="saveChangesBtn"
-                />
-                <button
-                  onClick={this.deleteNote}
-                  type="button"
-                  className="saveChangesBtn deleteBtn"
-                >
-                  Delete Note
-                </button>
-              </div>
-            )}
-          </form>
+            </form>
         )}
 
         {this.renderShareModal()}
       </Modal>
+        </div>
     );
   }
 }
