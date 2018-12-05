@@ -6,9 +6,10 @@ import _ from 'lodash';
 import thumps_up from "./thumps_up.svg";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import { zoomIn } from "react-animations";
-import Radium, { StyleRoot } from "radium";
 import SingleNoteModal from "../SingleNoteModal/SingleNoteModal";
 import Modal from "react-modal";
+import Filter from '../Filter/filter';
+import SortBy from '../Sorting/sortby';
 
 class ListNotes extends Component {
   constructor(props) {
@@ -22,6 +23,9 @@ class ListNotes extends Component {
     this.removeFavorited = this.removeFavorited.bind(this);
     this.submitFavorite = this.submitFavorite.bind(this);
     this.renderCheatSheet = this.renderCheatSheet.bind(this);
+    this.recommend = this.recommend.bind(this);
+    this.byLikes = this.byLikes.bind(this);
+    this.byDate = this.byDate.bind(this);
   }
 
   componentDidMount() {}
@@ -83,10 +87,73 @@ class ListNotes extends Component {
     this.props.removeFavorite(data);
   }
 
-  renderNote(notes) {
+  recommend(notes){
+    let usertags = this.props.auth.tags;
+      let sortedKeys = [];
+      for(let key in notes){
+        if(notes[key].tags.some(a => usertags.includes(a))){
+          sortedKeys.unshift(key);
+        }
+        else{
+          sortedKeys.push(key);
+        }
+    }
+    let output = {};
+    for(let key of sortedKeys){
+      output[key] = notes[key];
+    }
+    return output;
+  }
 
+  byLikes(notes){
     console.log(notes);
-    return _.map(notes, note => {
+    let output = {};
+    let arr = [];
+    for(let key in notes){
+      arr.push({"key":key,val:notes[key].numberOfLikes});
+    }
+    arr.sort(function(a,b){ return b.val - a.val});
+    for(let obj of arr){
+      output[obj.key] = notes[obj.key];
+    }
+    return output;
+  }
+
+  byDate(notes){
+    return this.props.notes;
+  }
+  renderNote(notes) {
+    let sort = this.props.sort;
+    let val = this.props.filter;
+    let output = {};
+    if(this.props.filter.length > 0){
+      for(let note in notes){
+        let tags =  notes[note]['tags'];
+        for(let tag of tags){
+          for(let value of val){
+            if(tag.indexOf(value)>=0){
+              output[note] = notes[note];
+            }
+          }
+        }
+      }
+    }
+    else{
+      output = this.recommend(notes);
+    }
+    if(sort){
+      if(sort == 1){
+        output = this.recommend(output);
+      }
+      else if(sort == 2){
+        output = this.byDate(output);
+      }
+      else{
+        output = this.byLikes(output);
+      }
+    }
+
+    return _.map(output, note => {
       const noteListTitleWrapper = {
         backgroundColor: "#424242",
         color: "white",
@@ -189,24 +256,34 @@ class ListNotes extends Component {
     }
 
   render() {
+    console.log(this.props.filter);
     if (this.props.notes === null) {
       return <div>Loading..</div>;
     }
     return (
-      <StyleRoot>
+      <div>
+        <div className="row filSort">
+          <div className="filterMe">
+            <Filter/>
+          </div>
+          <div className="sortMe">
+            <SortBy/>
+          </div>
+           
+        </div>
         <Flipper flipKey="abcd">
           <div className="row noteListMainWrapper">
               {this.props.isCheatSheet===true ? this.renderCheatSheet() : this.renderNote(this.props.notes)}
             {this.renderNoteModal()}
           </div>
         </Flipper>
-      </StyleRoot>
+      </div>  
     );
   }
 }
 
-function mapStateToProps({ notes, auth }) {
-  return { notes, auth };
+function mapStateToProps({ notes, auth, filter, sort }) {
+  return { notes, auth, filter, sort };
 }
 
 export default connect(

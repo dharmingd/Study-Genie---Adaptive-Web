@@ -12,7 +12,9 @@ import {
   REMOVE_LIKE,
   POST_FAVORITE,
   REMOVE_FAVORITE,
-  UPDATE_NOTE
+  UPDATE_NOTE,
+  UPDATE_FILTER,
+  UPDATE_SORT
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -103,4 +105,11 @@ export const updateNote = data => async dispatch => {
   dispatch({ type: UPDATE_NOTE, payload: res.data });
 };
 
+export const updateFilter = data => {
+  return { type: UPDATE_FILTER, payload: data};
+}
+
+export const updateSort = data => {
+  return { type: UPDATE_SORT, payload: data};
+}
 

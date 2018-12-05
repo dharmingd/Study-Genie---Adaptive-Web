@@ -11,3 +11,5 @@ export const REMOVE_LIKE = 'REMOVE_LIKE';
 export const POST_FAVORITE = 'POST_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+export const UPDATE_FILTER = 'UPDATE_FILTER';
+export const UPDATE_SORT = 'UPDATE_SORT';

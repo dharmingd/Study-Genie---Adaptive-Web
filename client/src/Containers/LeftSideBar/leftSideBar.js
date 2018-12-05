@@ -49,10 +49,10 @@ class LeftSideBar extends Component {
 
     return (
       <div className="leftBar">
-        <i class="material-icons" onClick={() => this.closeIt(true)} id="closeB">
+        <i className="material-icons" onClick={() => this.closeIt(true)} id="closeB">
           close
         </i>
-        <i class="material-icons"  onClick={() => this.closeIt(false)} id="change">
+        <i className="material-icons"  onClick={() => this.closeIt(false)} id="change">
           menu
         </i>
        { this.state.show && 

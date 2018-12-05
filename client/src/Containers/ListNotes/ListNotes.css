@@ -126,3 +126,12 @@
     transform: scale(0);
     transition: transform 1000ms ease;
 }
+
+
+.filSort {
+    margin-left: 55%;
+    margin-bottom: 3%;
+}
+.sortMe {
+    margin-left: 10%;
+}
