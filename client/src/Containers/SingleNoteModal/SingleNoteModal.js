@@ -21,7 +21,7 @@ class SingleNoteModal extends Component {
       showUpdateNoteMsg: false,
       isDeleted: false,
       showPopup: false,
-        hideElement: false
+      hideElement: false
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.renderShareModal = this.renderShareModal.bind(this);
@@ -52,6 +52,7 @@ class SingleNoteModal extends Component {
       this.refs["popup"].findDOMNode().style.display = "none";
       //document.getElementById("popup").style.display = "none";
   }
+
   handleFocus() {
     this.setState({ showPopup: true, hideElement: true });
   }
@@ -143,6 +144,16 @@ class SingleNoteModal extends Component {
       });
     });
   }
+  changePosition = (x,y,text) => {
+
+    console.log(x,y,text);
+    console.log(document.getElementById("popup"),"here");
+    document.getElementById("popup").style.display = "block";
+    var d = document.getElementById("popup");
+    d.style.position = "fixed";
+    d.style.left = x+'px';
+    d.style.top=y-60+'px';
+}
 
   render() {
     const nTextarea = {

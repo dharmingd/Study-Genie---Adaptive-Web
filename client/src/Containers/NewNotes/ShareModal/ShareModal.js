@@ -7,14 +7,7 @@ import * as actions from "../../../Actions";
 import _ from "lodash";
 import ListGroup from "./ListGroup";
 import { zoomIn } from "react-animations";
-import Radium, { StyleRoot } from "radium";
 
-const styles = {
-  zoomIn: {
-    animation: "x 1s",
-    animationName: Radium.keyframes(zoomIn, "zoomIn")
-  }
-};
 
 class ShareModal extends Component {
   constructor(props) {
@@ -86,8 +79,7 @@ class ShareModal extends Component {
       borderRadius: "0"
     };
     return (
-      <StyleRoot>
-        <div style={styles.zoomIn}>
+        <div>
           <Modal
             isOpen={this.state.isOpen}
             ariaHideApp={false}
@@ -98,7 +90,6 @@ class ShareModal extends Component {
             overlayClassName="customOverlayModal"
             role="dialog"
             closeTimeoutMS={1000}
-            style={styles.zoomIn}
           >
             <div className="row">
               <div className="col-md-6 ListGroupWrapper">
@@ -211,7 +202,6 @@ class ShareModal extends Component {
               </div>}
           </Modal>
         </div>
-      </StyleRoot>
     );
   }
 }
