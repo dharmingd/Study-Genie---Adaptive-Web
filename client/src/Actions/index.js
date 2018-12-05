@@ -13,6 +13,8 @@ import {
   POST_FAVORITE,
   REMOVE_FAVORITE,
   UPDATE_NOTE,
+  UPDATE_FILTER,
+  UPDATE_SORT
     GET_GROUPS,
     GET_ONE_GROUP,
     JOIN_GROUP,
@@ -108,6 +110,15 @@ export const updateNote = data => async dispatch => {
   console.log(res.data);
   dispatch({ type: UPDATE_NOTE, payload: res.data });
 };
+
+
+export const updateFilter = data => {
+  return { type: UPDATE_FILTER, payload: data};
+}
+
+export const updateSort = data => {
+  return { type: UPDATE_SORT, payload: data};
+}
 
 export const getPublicGroups = () => async dispatch => {
     //console.log(data);
