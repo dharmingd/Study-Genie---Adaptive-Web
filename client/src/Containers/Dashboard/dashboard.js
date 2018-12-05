@@ -12,6 +12,7 @@ import CheatSheet from '../CheatSheets/CheatSheet';
 import PublicGroups from '../PublicGroups/PublicGroups';
 import SingleGroups from '../SingleGroups/SingleGroups';
 import MyGroups from '../MyGroups/MyGroups';
+import CollaborativeNotes from '../CollaborativeNotes/CollaborativeNotes';
 
 class Dashboard extends Component{
 
@@ -57,6 +58,7 @@ class Dashboard extends Component{
                                     <Route exact path={`${this.props.match.path}/public/groups`} component={PublicGroups} />
                                     <Route exact path={`${this.props.match.path}/groups/:id`} component={SingleGroups} />
                                     <Route exact path={`${this.props.match.path}/my/groups`} component={MyGroups} />
+                                    <Route exact path={`${this.props.match.path}/private`} component={CollaborativeNotes} />
                                 </div>
                             </div>
 
