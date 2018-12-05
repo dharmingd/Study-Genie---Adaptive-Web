@@ -9,18 +9,23 @@ export default class Popup extends React.Component {
         let selection = this.props.selection;
         let text = selection.toString();
         console.log(text);
-        if(selection.toString().length>0){
+        if(text.length>0){
+            console.log("hereee");
+            this.props.fromPopup(250,100,text);
             let range = selection.getRangeAt(0).cloneRange();
             if (range.getClientRects) {
+                console.log(selection);
                 range.collapse(true);
                 let rects = range.getClientRects();
+                console.log(rects);
                 if (rects.length > 0) {
                     var rect = rects[0];
-                }
-                var x = rect.left;
+                    var x = rect.left;
                 var y = rect.top;
                 console.log(x,y,"x");
-                this.props.fromPopup(x,y);
+                
+                }
+                
             } 
         }
     

@@ -7,6 +7,7 @@ import * as actions from "../../Actions";
 import ShareModal from "../NewNotes/ShareModal/ShareModal";
 import { withRouter } from "react-router";
 import axios from "axios/index";
+import Popup from '../../Components/Popup/popup';
 
 class SingleNoteModal extends Component {
   constructor(props) {
@@ -18,13 +19,15 @@ class SingleNoteModal extends Component {
       showShareModal: false,
       showShareMessage: false,
       showUpdateNoteMsg: false,
-        isDeleted: false
+        isDeleted: false,
+        showPopup:false
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.renderShareModal = this.renderShareModal.bind(this);
     this.shareNoteBtn = this.shareNoteBtn.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +46,11 @@ class SingleNoteModal extends Component {
         this.state.map.set(group._id, false);
       });
     });
+  }
+  
+  handleFocus(){
+    console.log(window.getSelection());
+    this.setState({showPopup:true});
   }
   async deleteNote(event) {
     event.preventDefault();
@@ -120,6 +128,16 @@ class SingleNoteModal extends Component {
       });
     });
   }
+  changePosition = (x,y,text) => {
+
+    console.log(x,y,text);
+    console.log(document.getElementById("popup"),"here");
+    document.getElementById("popup").style.display = "block";
+    var d = document.getElementById("popup");
+    d.style.position = "fixed";
+    d.style.left = x+'px';
+    d.style.top=y-60+'px';
+}
 
   render() {
     const nTextarea = {
@@ -167,6 +185,7 @@ class SingleNoteModal extends Component {
                   className="singleNoteTitleText"
                 />
               </div>
+              <div id="popup"><Popup selection={window.getSelection()} fromPopup={this.changePosition}/></div>
               <div className="col-md-2">
                 <div className="row">
                   <div className="col-md-4">
@@ -234,6 +253,7 @@ class SingleNoteModal extends Component {
               defaultValue={note.content}
               id="content"
               readOnly={this.props.auth._id !== note._user}
+              onClick={this.handleFocus}
             />
             <div>
               {note.tags.map((tag, index) => (
