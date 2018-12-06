@@ -13,7 +13,12 @@ module.exports = app => {
         passport.authenticate('google'),
         (req, res) => {
             console.log(req.user);
-            res.redirect('/user/public/notes');
+            if(req.user.new===true){
+                res.redirect('/user/details');
+            }else{
+                res.redirect('/user/public/notes');
+            }
+
         }
     );
 

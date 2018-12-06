@@ -131,3 +131,24 @@
     display: none;
 }
 
+.account{
+    //margin-top: 200px;
+}
+
+.popupClass{
+    position: absolute;
+    left: -176px;
+    width: 180px;
+    top: -4px;
+}
+
+.savedToCheatsheet{
+    //background-color: #58D68D;
+    color: #58D68D;
+    //width: 45px;
+    //margin-left: 5px;
+    //padding: 3px;
+    font-size: 0.8em;
+    margin-top: 5px;
+    font-weight: bold;
+}

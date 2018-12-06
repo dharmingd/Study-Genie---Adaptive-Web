@@ -162,6 +162,29 @@ class LeftSideBar extends Component {
                   {this.state.show && <div className="category">My Groups</div>}
               </NavLink>
           </div>
+          <hr className='lineHo'/>
+          <div className="account iconCategory">
+              <NavLink
+                  exact
+                  to="/user/details"
+                  className="navlink"
+                  activeClassName="selectedNavBarLink"
+              >
+                  <div className="icon groupWorkIconPadding">
+                      <i className="fa fa-user" />
+                  </div>
+                  {this.state.show && <div className="category">Profile Settings</div>}
+              </NavLink>
+          </div>
+          <div className="iconCategory">
+              <a href="/api/logout" className='navlink'>
+                  <div className="icon groupWorkIconPadding">
+                      <i className="material-icons groupWorkIcon">logout</i>
+                  </div>
+                  {this.state.show && <div className="category">Logout</div>}
+              </a>
+          </div>
+
       </div>
     );
   }

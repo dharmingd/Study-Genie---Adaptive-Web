@@ -319,5 +319,40 @@ module.exports = app => {
         }).catch((e)=>{
             res.status(401).send();
         })
-    })
+    });
+
+    app.get('/api/cheetsheets/list', requireLogin, (req, res)=>{
+        Note.find({
+            _user: req.user._id,
+            category: 'Cheat Sheet'
+        }).select('+title').then((cheatsheets)=>{
+            console.log(cheatsheets);
+            res.send(cheatsheets);
+        }).catch(e=>{
+            res.status(401).send();
+        })
+    });
+
+    app.put('/api/cheatsheet/save', requireLogin, (req, res)=>{
+
+        const {_id, content} = req.body;
+
+        Note.find({
+            _user: req.user._id,
+            category: 'Cheat Sheet',
+            _id
+        }).then((note)=>{
+            Note.updateOne({
+              _id: note[0]._id,
+            },{
+                content: note[0].content + " " +content
+            }).then(()=>{
+                res.send({success: true});
+            })
+        }).catch(e=>{
+            console.log(e);
+            res.status(401).send();
+        })
+    });
+
 };

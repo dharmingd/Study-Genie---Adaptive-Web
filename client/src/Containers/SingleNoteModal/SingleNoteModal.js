@@ -20,14 +20,19 @@ class SingleNoteModal extends Component {
       showShareMessage: false,
       showUpdateNoteMsg: false,
         isDeleted: false,
-        showPopup:false
+        showPopup:false,
+        text: '',
+        contentSaved: false
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.renderShareModal = this.renderShareModal.bind(this);
     this.shareNoteBtn = this.shareNoteBtn.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
+    //this.handleFocus = this.handleFocus.bind(this);
+    //this.changePosition = this.changePosition.bind(this);
+      this.textSelected = this.textSelected.bind(this);
+    this.saveToCheatSheets = this.saveToCheatSheets.bind(this);
   }
 
   componentDidMount() {
@@ -48,10 +53,10 @@ class SingleNoteModal extends Component {
     });
   }
   
-  handleFocus(){
-    console.log(window.getSelection());
-    this.setState({showPopup:true});
-  }
+  // handleFocus(){
+  //   console.log(window.getSelection());
+  //   this.setState({showPopup:true});
+  // }
   async deleteNote(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -128,16 +133,53 @@ class SingleNoteModal extends Component {
       });
     });
   }
-  changePosition = (x,y,text) => {
+//   changePosition = (x,y,text) => {
+//
+//     console.log(x,y,text);
+//     console.log(document.getElementById("popup"),"here");
+//     document.getElementById("popup").style.display = "block";
+//     var d = document.getElementById("popup");
+//     d.style.position = "fixed";
+//     d.style.left = x+'px';
+//     d.style.top=y-60+'px';
+//
+// }
+    async saveToCheatSheets(event, noteid){
+    event.preventDefault();
+    event.stopPropagation();
+        const data ={_id: noteid, content: this.state.text};
+        const res = await axios.put('/api/cheatsheet/save', data).then(()=>{
+          this.setState({
+              contentSaved: true
+          })
+        });
+        // this.setState({
+        //     contentSaved: true
+        // })
 
-    console.log(x,y,text);
-    console.log(document.getElementById("popup"),"here");
-    document.getElementById("popup").style.display = "block";
-    var d = document.getElementById("popup");
-    d.style.position = "fixed";
-    d.style.left = x+'px';
-    d.style.top=y-60+'px';
-}
+    }
+
+    textSelected(){
+      if(window.getSelection){
+          let text =  window.getSelection().toString();
+          console.log(text.length);
+          if(text.length>0){
+            //console.log("here");
+           this.setState({
+               showPopup: true,
+               text: text,
+               contentSaved: false
+           })
+              //console.log(this.state.showPopup);
+          }else{
+              this.setState({
+                  showPopup: false,
+                  text: '',
+                  contentSaved: false
+              })
+          }
+      }
+    }
 
   render() {
     const nTextarea = {
@@ -174,7 +216,7 @@ class SingleNoteModal extends Component {
         {this.state.isDeleted ? (
           <div className='deltetedMsg'>Your Post has been deleted</div>
         ) : (
-          <form onSubmit={this.saveChanges}>
+          <form onSubmit={this.saveChanges} onSelect={this.textSelected}>
             <div className="row singleNoteTitleWrapper">
               <div className="col-md-10 singleNoteTitle">
                 <input
@@ -185,7 +227,9 @@ class SingleNoteModal extends Component {
                   className="singleNoteTitleText"
                 />
               </div>
-              <div id="popup"><Popup selection={window.getSelection()} fromPopup={this.changePosition}/></div>
+                {this.state.showPopup && (<div className='popupClass'><Popup contentSaved={this.state.contentSaved} selection={window.getSelection().toString()} saveToCheatSheets={this.saveToCheatSheets} />
+
+                </div>)}
               <div className="col-md-2">
                 <div className="row">
                   <div className="col-md-4">

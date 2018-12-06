@@ -1,9 +1,10 @@
 .toolTipContainer{
-    background-color: blue;
+    background-color: #424242;
     margin: 2%;
+    padding: 10px;
 }
-.tooltiptext {
-    width: 80px;
+.tooltiptext .popupClass{
+    width: 180px;
     background-color: rgb(36, 35, 35);
     color: #fff;
     text-align: center;
@@ -12,7 +13,6 @@
     padding: 5px 0;
     opacity: 1;
     transition: opacity 0.3s;
-    
 }
 
 .tooltiptext::after {
@@ -23,4 +23,16 @@
     left: 42%;
     border-style: solid;
     border-color: rgb(36, 35, 35) transparent transparent transparent;
+}
+
+.cheatsheetBtn{
+    background-color: transparent;
+    border: 0.5px solid white;
+    color: white;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.cheatsheetBtn:hover{
+    cursor: pointer;
 }
