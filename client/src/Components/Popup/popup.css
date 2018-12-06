@@ -36,3 +36,8 @@
 .cheatsheetBtn:hover{
     cursor: pointer;
 }
+
+.noCheatSheetMsg{
+    color: #D7DBDD;
+    font-size: 0.7em;
+}

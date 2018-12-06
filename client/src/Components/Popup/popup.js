@@ -6,7 +6,7 @@ export default class Popup extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            cheatsheets: [],
+            cheatsheets: null,
             selectedText: null
         }
 
@@ -47,6 +47,11 @@ export default class Popup extends React.Component {
 
 
     renderCheatSheets(){
+
+        if(this.state.cheatsheets.length===0){
+            return <div className='noCheatSheetMsg'>Please create a cheatsheet to directly add selected text.</div>
+        }
+
         return this.state.cheatsheets.map((cheatsheet)=>{
             const id = cheatsheet._id;
             return (
@@ -59,8 +64,8 @@ export default class Popup extends React.Component {
 
     render(){
 
-        if(this.state.cheatsheets.length===0){
-            return <div>You haven't created any cheatsheet</div>
+        if(this.state.cheatsheets===null){
+            return <div>Loading...</div>
         }
 
         return(

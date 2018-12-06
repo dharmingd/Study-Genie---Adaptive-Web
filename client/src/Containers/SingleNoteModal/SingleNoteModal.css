@@ -3,7 +3,7 @@
     top: 5%;
     left: 30%;
     right: 25%;
-    height: auto;
+    //height: 2000px;
     border: none;
     box-shadow: 0 0 10px #ABB2B9;
     background-color: white;
@@ -13,15 +13,16 @@
     z-index: 999;
 }
 .singleNoteOverlayModal{
-    position: fixed;
+    position: absolute;
     z-index: 1000;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -500px;
+    //height: 100%;
     background-image: url("singleNoteModalBack.png");
-    //background-repeat: no-repeat;
-    background-size: contain;
+    background-repeat: repeat;
+    background-size: 100% 100%;
 }
 
 .singleNoteTitleText{
