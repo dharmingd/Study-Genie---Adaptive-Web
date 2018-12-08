@@ -131,7 +131,7 @@ class LeftSideBar extends Component {
             <div className="icon">
               <i className="fa fa-users" />
             </div>
-            {this.state.show && <div className="category">Collaborative Notes</div>}
+            {this.state.show && <div className="category">Visualizations</div>}
           </NavLink>
         </div>
           <div className='lineHoOuter'>

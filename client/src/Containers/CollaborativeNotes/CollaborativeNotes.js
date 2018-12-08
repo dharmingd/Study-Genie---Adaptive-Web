@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Bar} from 'react-chartjs-2';
+import {Bar, Pie} from 'react-chartjs-2';
 
 
 export default class CollaborativeNotes extends Component {
@@ -22,6 +22,33 @@ export default class CollaborativeNotes extends Component {
                     }
                 }]
             }
+        }, piedata: {
+            labels: [
+                'Ashni',
+                'Malay',
+                'Maitreyi', 'Meet','Darsh','Ayan','Sushrut','Dharmin','Jay','Hote'
+            ],
+            datasets: [{
+                data: [300, 50, 100,20,30,10,40,90,35,55],
+                backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#8080ff',
+                '#ff809f',
+                '#dfff80',
+                '#ffbf80',
+                '#80ffdf',
+                '#ff8080',
+                '#e6ff99'
+                
+                ],
+                hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+                ]
+            }]
         }}
     }
 
@@ -32,7 +59,13 @@ export default class CollaborativeNotes extends Component {
     render(){
         return(
             <div>
-                <Bar data={this.state.data} options={this.state.options} />
+                <div>
+                    <Bar data={this.state.data} options={this.state.options} />
+                </div>
+                <div>
+                    <Pie data={this.state.piedata}/>
+                </div>
+                
             </div>
             
         );
